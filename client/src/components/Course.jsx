@@ -25,19 +25,17 @@ const Course = ({ course }) => {
             <div className='flex items-center gap-2 my-2'>
                 <Button className="p-6" variant="outline" size="icon">
                     <Avatar>
-                        <AvatarImage src={course?.company?.logo} />
+                        <AvatarImage src={course?.language?.logo} />
                     </Avatar>
                 </Button>
                 <div>
-                    <h1 className='font-medium text-lg'>{course?.company?.name}</h1>
+                    <h1 className='font-medium text-lg'>{course?.language?.languageName}</h1>
                     <p className='text-sm text-gray-500'>India</p>
                 </div>
             </div>
 
             <div>
                 <h1 className='font-bold text-lg my-2'>{course?.courseName}</h1>
-                <p className=' font-bold text-sm text-gray-1200'>{course?.language?.languageName || "Unknown Language"}</p> {/* Assuming you need to display language name */}
-
                 <p className='text-sm text-gray-600'>{course?.aboutCourse}</p>
             </div>
             <div className='flex items-center gap-2 mt-4'>
