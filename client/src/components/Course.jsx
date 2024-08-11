@@ -36,6 +36,8 @@ const Course = ({ course }) => {
 
             <div>
                 <h1 className='font-bold text-lg my-2'>{course?.courseName}</h1>
+                <p className=' font-bold text-sm text-gray-1200'>{course?.language?.languageName || "Unknown Language"}</p> {/* Assuming you need to display language name */}
+
                 <p className='text-sm text-gray-600'>{course?.aboutCourse}</p>
             </div>
             <div className='flex items-center gap-2 mt-4'>

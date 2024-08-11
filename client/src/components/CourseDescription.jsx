@@ -55,7 +55,8 @@ const CourseDescription = () => {
             <div className='flex items-center justify-between'>
                 <div>
                     <h1 className='font-bold text-xl'>{singleCourse?.courseName}</h1>
-                    <div className='flex items-center gap-2 mt-4'>
+
+                    <div className='flex items-center gap-2 mt-4'>  
                         <Badge className={'text-blue-700 font-bold'} variant="ghost">{singleCourse?.level}</Badge>
                         <Badge className={'text-[#F83002] font-bold'} variant="ghost">{singleCourse?.feeType}</Badge>
                         <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{singleCourse?.fees}</Badge>
