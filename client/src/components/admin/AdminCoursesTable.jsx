@@ -39,7 +39,7 @@ const AdminCoursesTable = () => {
                     {
                         filterCourses?.map((course) => (
                             <tr>
-                                <TableCell>{course?.language?.name}</TableCell>
+                                <TableCell>{course?.language?.languageName}</TableCell>
                                 <TableCell>{course?.title}</TableCell>
                                 <TableCell>{course?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className="text-right cursor-pointer">

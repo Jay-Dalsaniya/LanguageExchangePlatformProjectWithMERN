@@ -12,22 +12,22 @@ export const registerLanguage = async (req, res) => {
                 success: false
             });
         }
-        let existingLanguage = await Language.findOne({ languageName: languageName });
-        if (existingLanguage) {
+        let language = await Language.findOne({ languageName: languageName });
+        if (language) {
             return res.status(400).json({
                 message: "You can't register the same language.",
                 success: false
             })
 
         };
-        const newLanguage = await Language.create({
-            languageName: languageName,
+        language = await Company.create({
+            name: companyName,
             userId: req.id
         });
 
         return res.status(201).json({
             message: "Language registered successfully.",
-            Language: newLanguage,
+            language,
             success: true
         })
     } catch (error) {
@@ -36,7 +36,7 @@ export const registerLanguage = async (req, res) => {
 }
 
 // Get all languages registered by a user
-export const getLanguages = async (req, res) => {  // Changed 'getLanguage' to 'getLanguages'
+export const getLanguages = async (req, res) => {  
     try {
         const userId = req.id; // logged in user id
         const languages = await Language.find({ userId });
@@ -47,7 +47,7 @@ export const getLanguages = async (req, res) => {  // Changed 'getLanguage' to '
             })
         }
         return res.status(200).json({
-            languages,  // Changed 'companies' to 'languages'
+            languages,  
             success: true
         })
     } catch (error) {
@@ -58,7 +58,7 @@ export const getLanguages = async (req, res) => {  // Changed 'getLanguage' to '
 // Get language by id
 export const getLanguageById = async (req, res) => {
     try {
-        const languageId = req.params.id;  // Changed 'LanguageId' to 'languageId'
+        const languageId = req.params.id;  
         const language = await Language.findById(languageId);
         if (!language) {
             return res.status(404).json({
@@ -67,7 +67,7 @@ export const getLanguageById = async (req, res) => {
             })
         }
         return res.status(200).json({
-            language,  // Changed 'Language' to 'language'
+            language,  
             success: true
         })
     } catch (error) {

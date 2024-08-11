@@ -34,7 +34,7 @@ const PostCourse = () => {
     };
 
     const selectChangeHandler = (value) => {
-        const selectedLanguage = languages.find((language) => language.name.toLowerCase() === value);
+        const selectedLanguage = languages.find((language) => language.languageName.toLowerCase() === value);
         setInput({ ...input, languageId: selectedLanguage._id });
     };
 
@@ -156,7 +156,7 @@ const PostCourse = () => {
                                             {
                                                 languages.map((language) => {
                                                     return (
-                                                        <SelectItem value={language?.name?.toLowerCase()} key={language._id}>{language.name}</SelectItem>
+                                                        <SelectItem value={language?.languageName?.toLowerCase()} key={language._id}>{language.languageName}</SelectItem>
                                                     )
                                                 })
                                             }
