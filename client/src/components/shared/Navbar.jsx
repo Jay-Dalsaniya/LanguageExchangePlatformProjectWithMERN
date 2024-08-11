@@ -1,14 +1,14 @@
-import React from 'react'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Button } from '../ui/button'
-import { Avatar, AvatarImage } from '../ui/avatar'
-import { LogOut, User2 } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import { USER_API_END_POINT } from '@/utils/constant'
-import { setUser } from '@/redux/authSlice'
-import { toast } from 'sonner'
+import React from 'react';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Button } from '../ui/button';
+import { Avatar, AvatarImage } from '../ui/avatar';
+import { LogOut, User2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { USER_API_END_POINT } from '@/utils/constant';
+import { setUser } from '@/redux/authSlice';
+import { toast } from 'sonner';
 
 const Navbar = () => {
     const { user } = useSelector(store => store.auth);
@@ -32,7 +32,8 @@ const Navbar = () => {
     return (
         <div className='bg-white'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
-                <div>
+                <div className='flex items-center'>
+                    <img src="/LEP_logo.png" alt="LEP Logo" className="h-10 mr-3" />
                     <h1 className='text-2xl font-bold'>Language Exchange <span className='text-[#F83002]'>Platform</span></h1>
                 </div>
                 <div className='flex items-center gap-12'>
@@ -102,4 +103,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Navbar;
