@@ -12,7 +12,7 @@ const LatestCourseCards = ({ course }) => {
         >
             <div>
                 <h1 className='font-medium text-lg'>{course?.platform}</h1> {/* Updated field */}
-                <p className='text-sm text-gray-500'>{course?.language?.name || "Unknown Language"}</p> {/* Assuming you need to display language name */}
+                <p className='text-sm text-gray-500'>{course?.language?.languageName || "Unknown Language"}</p> {/* Assuming you need to display language name */}
             </div>
             <div>
                 <h1 className='font-bold text-lg my-2'>{course?.courseName}</h1> {/* Updated field */}
