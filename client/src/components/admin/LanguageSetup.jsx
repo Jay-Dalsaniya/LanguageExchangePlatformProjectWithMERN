@@ -64,14 +64,17 @@ const LanguageSetup = () => {
         }
     }
 
+
     useEffect(() => {
-        setInput({
-            languageName: singleLanguage.languageName || "",
-            description: singleLanguage.description || "",
-            website: singleLanguage.website || "",
-            location: singleLanguage.location || "",
-            file: singleLanguage.file || null
-        })
+        if (singleLanguage) {
+            setInput({
+                languageName: singleLanguage.languageName || "",
+                description: singleLanguage.description || "",
+                website: singleLanguage.website || "",
+                location: singleLanguage.location || "",
+                file: singleLanguage.file || null
+            });
+        }
     }, [singleLanguage]);
 
     return (
