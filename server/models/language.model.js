@@ -6,17 +6,19 @@ const languageSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    description: {
-        type: String
+    creator: {
+        type: String, // Name of the person or organization who created the language
+        required: true
     },
-    website: {
-        type: String
-    },
-    location: {
-        type: String
+    country: {
+        type: String, // Country where the language is primarily spoken or where it originated
+        required: true
     },
     logo: {
-        type: String // URL to Language logo
+        type: String // URL to the language logo
+    },
+    description: {
+        type: String, // Brief description of the language
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
