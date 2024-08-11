@@ -18,7 +18,7 @@ const AdminCoursesTable = () => {
             if(!searchCourseByText){
                 return true;
             };
-            return course?.title?.toLowerCase().includes(searchCourseByText.toLowerCase()) || course?.language?.name.toLowerCase().includes(searchCourseByText.toLowerCase());
+            return course?.courseName?.toLowerCase().includes(searchCourseByText.toLowerCase()) || course?.language?.languageName.toLowerCase().includes(searchCourseByText.toLowerCase());
 
         });
         setFilterCourses(filteredCourses);
@@ -30,7 +30,7 @@ const AdminCoursesTable = () => {
                 <TableHeader>
                     <TableRow>
                         <TableHead>Language Name</TableHead>
-                        <TableHead>Role</TableHead>
+                        <TableHead>courseName</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>

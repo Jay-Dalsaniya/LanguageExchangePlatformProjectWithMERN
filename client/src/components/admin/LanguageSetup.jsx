@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../shared/Navbar'
-import { Button } from '../ui/button'
-import { ArrowLeft, Loader2 } from 'lucide-react'
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
-import axios from 'axios'
-import { LANGUAGE_API_END_POINT } from '@/utils/constant'
-import { useNavigate, useParams } from 'react-router-dom'
-import { toast } from 'sonner'
-import { useSelector } from 'react-redux'
-import useGetLanguageById from '@/hooks/useGetLanguageById'
+import React, { useEffect, useState } from 'react';
+import Navbar from '../shared/Navbar';
+import { Button } from '../ui/button';
+import { ArrowLeft, Loader2 } from 'lucide-react';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import axios from 'axios';
+import { LANGUAGE_API_END_POINT } from '@/utils/constant';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
+import useGetLanguageById from '@/hooks/useGetLanguageById';
 
 const LanguageSetup = () => {
     const params = useParams();
     useGetLanguageById(params.id);
     const [input, setInput] = useState({
         languageName: "",
+        creator: "",
+        country: "",
         description: "",
-        website: "",
-        location: "",
         file: null
     });
     const { singleLanguage } = useSelector(store => store.language);
@@ -38,9 +38,9 @@ const LanguageSetup = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("languageName", input.languageName);
+        formData.append("creator", input.creator);
+        formData.append("country", input.country);
         formData.append("description", input.description);
-        formData.append("website", input.website);
-        formData.append("location", input.location);
         if (input.file) {
             formData.append("file", input.file);
         }
@@ -64,15 +64,14 @@ const LanguageSetup = () => {
         }
     }
 
-
     useEffect(() => {
         if (singleLanguage) {
             setInput({
                 languageName: singleLanguage.languageName || "",
+                creator: singleLanguage.creator || "",
+                country: singleLanguage.country || "",
                 description: singleLanguage.description || "",
-                website: singleLanguage.website || "",
-                location: singleLanguage.location || "",
-                file: singleLanguage.file || null
+                file: null // Set to null since file input cannot be pre-filled
             });
         }
     }, [singleLanguage]);
@@ -100,29 +99,29 @@ const LanguageSetup = () => {
                             />
                         </div>
                         <div>
+                            <Label>Creator</Label>
+                            <Input
+                                type="text"
+                                name="creator"
+                                value={input.creator}
+                                onChange={changeEventHandler}
+                            />
+                        </div>
+                        <div>
+                            <Label>Country</Label>
+                            <Input
+                                type="text"
+                                name="country"
+                                value={input.country}
+                                onChange={changeEventHandler}
+                            />
+                        </div>
+                        <div>
                             <Label>Description</Label>
                             <Input
                                 type="text"
                                 name="description"
                                 value={input.description}
-                                onChange={changeEventHandler}
-                            />
-                        </div>
-                        <div>
-                            <Label>Website</Label>
-                            <Input
-                                type="text"
-                                name="website"
-                                value={input.website}
-                                onChange={changeEventHandler}
-                            />
-                        </div>
-                        <div>
-                            <Label>Location</Label>
-                            <Input
-                                type="text"
-                                name="location"
-                                value={input.location}
                                 onChange={changeEventHandler}
                             />
                         </div>
@@ -141,7 +140,7 @@ const LanguageSetup = () => {
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default LanguageSetup
+export default LanguageSetup;
