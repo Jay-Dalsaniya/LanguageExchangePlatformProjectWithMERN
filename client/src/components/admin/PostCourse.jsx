@@ -11,31 +11,31 @@ import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 import { Loader2 } from 'lucide-react'
 
-const languageArray = [];
-
 const PostCourse = () => {
     const [input, setInput] = useState({
-        title: "",
-        description: "",
-        requirements: "",
-        salary: "",
-        location: "",
-        courseType: "",
-        experience: "",
-        position: 0,
-        languageId: ""
+        courseName: "",
+        subject: "",
+        platform: "",
+        duration: "",
+        fees: "",
+        feeType: "",
+        level: "",
+        aboutCourse: "",
+        language: "",
+        position: 0
     });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const { languages } = useSelector(store => store.language); // Assuming company store contains languages
+    const { languages } = useSelector(store => store.language); // Assuming language store contains languages
+
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
 
     const selectChangeHandler = (value) => {
         const selectedLanguage = languages.find((language) => language.languageName.toLowerCase() === value);
-        setInput({ ...input, languageId: selectedLanguage._id });
+        setInput({ ...input, language: selectedLanguage._id });
     };
 
     const submitHandler = async (e) => {
@@ -66,71 +66,81 @@ const PostCourse = () => {
                 <form onSubmit={submitHandler} className='p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md'>
                     <div className='grid grid-cols-2 gap-2'>
                         <div>
-                            <Label>Title</Label>
+                            <Label>Course Name</Label>
                             <Input
                                 type="text"
-                                name="title"
-                                value={input.title}
+                                name="courseName"
+                                value={input.courseName}
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
                         <div>
-                            <Label>Description</Label>
+                            <Label>Subject</Label>
                             <Input
                                 type="text"
-                                name="description"
-                                value={input.description}
+                                name="subject"
+                                value={input.subject}
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
                         <div>
-                            <Label>Requirements</Label>
+                            <Label>Platform</Label>
                             <Input
                                 type="text"
-                                name="requirements"
-                                value={input.requirements}
+                                name="platform"
+                                value={input.platform}
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
                         <div>
-                            <Label>Salary</Label>
+                            <Label>Duration</Label>
                             <Input
                                 type="text"
-                                name="salary"
-                                value={input.salary}
+                                name="duration"
+                                value={input.duration}
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
                         <div>
-                            <Label>Location</Label>
+                            <Label>Fees</Label>
                             <Input
                                 type="text"
-                                name="location"
-                                value={input.location}
+                                name="fees"
+                                value={input.fees}
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
                         <div>
-                            <Label>Course Type</Label>
+                            <Label>Fee Type</Label>
                             <Input
                                 type="text"
-                                name="courseType"
-                                value={input.courseType}
+                                name="feeType"
+                                value={input.feeType}
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
                         <div>
-                            <Label>Experience Level</Label>
+                            <Label>Level</Label>
                             <Input
                                 type="text"
-                                name="experience"
-                                value={input.experience}
+                                name="level"
+                                value={input.level}
+                                onChange={changeEventHandler}
+                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
+                            />
+                        </div>
+                        <div>
+                            <Label>About Course</Label>
+                            <Input
+                                type="text"
+                                name="aboutCourse"
+                                value={input.aboutCourse}
                                 onChange={changeEventHandler}
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
@@ -154,11 +164,9 @@ const PostCourse = () => {
                                     <SelectContent>
                                         <SelectGroup>
                                             {
-                                                languages.map((language) => {
-                                                    return (
-                                                        <SelectItem value={language?.languageName?.toLowerCase()} key={language._id}>{language.languageName}</SelectItem>
-                                                    )
-                                                })
+                                                languages.map((language) => (
+                                                    <SelectItem value={language?.languageName?.toLowerCase()} key={language._id}>{language.languageName}</SelectItem>
+                                                ))
                                             }
                                         </SelectGroup>
                                     </SelectContent>

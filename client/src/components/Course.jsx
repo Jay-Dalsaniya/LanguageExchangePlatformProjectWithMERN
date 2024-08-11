@@ -35,13 +35,13 @@ const Course = ({ course }) => {
             </div>
 
             <div>
-                <h1 className='font-bold text-lg my-2'>{course?.title}</h1>
-                <p className='text-sm text-gray-600'>{course?.description}</p>
+                <h1 className='font-bold text-lg my-2'>{course?.courseName}</h1>
+                <p className='text-sm text-gray-600'>{course?.aboutCourse}</p>
             </div>
             <div className='flex items-center gap-2 mt-4'>
-                <Badge className={'text-blue-700 font-bold'} variant="ghost">{course?.position} Positions</Badge>
-                <Badge className={'text-[#F83002] font-bold'} variant="ghost">{course?.jobType}</Badge>
-                <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{course?.salary}LPA</Badge>
+                <Badge className={'text-blue-700 font-bold'} variant="ghost">{course?.level}</Badge>
+                <Badge className={'text-[#F83002] font-bold'} variant="ghost">{course?.feeType}</Badge>
+                <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{course?.fees}</Badge>
             </div>
             <div className='flex items-center gap-4 mt-4'>
                 <Button onClick={() => navigate(`/description/${course?._id}`)} variant="outline">Details</Button>

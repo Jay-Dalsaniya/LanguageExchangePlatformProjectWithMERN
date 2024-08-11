@@ -54,11 +54,11 @@ const CourseDescription = () => {
         <div className='max-w-7xl mx-auto my-10'>
             <div className='flex items-center justify-between'>
                 <div>
-                    <h1 className='font-bold text-xl'>{singleCourse?.title}</h1>
+                    <h1 className='font-bold text-xl'>{singleCourse?.courseName}</h1>
                     <div className='flex items-center gap-2 mt-4'>
-                        <Badge className={'text-blue-700 font-bold'} variant="ghost">{singleCourse?.position} Positions</Badge>
-                        <Badge className={'text-[#F83002] font-bold'} variant="ghost">{singleCourse?.courseType}</Badge>
-                        <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{singleCourse?.salary}LPA</Badge>
+                        <Badge className={'text-blue-700 font-bold'} variant="ghost">{singleCourse?.level}</Badge>
+                        <Badge className={'text-[#F83002] font-bold'} variant="ghost">{singleCourse?.feeType}</Badge>
+                        <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{singleCourse?.fees}</Badge>
                     </div>
                 </div>
                 <Button
@@ -70,13 +70,11 @@ const CourseDescription = () => {
             </div>
             <h1 className='border-b-2 border-b-gray-300 font-medium py-4'>Course Description</h1>
             <div className='my-4'>
-                <h1 className='font-bold my-1'>Role: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.title}</span></h1>
-                <h1 className='font-bold my-1'>Location: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.location}</span></h1>
-                <h1 className='font-bold my-1'>Description: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.description}</span></h1>
-                <h1 className='font-bold my-1'>Experience: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.experience} yrs</span></h1>
-                <h1 className='font-bold my-1'>Salary: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.salary}LPA</span></h1>
-                <h1 className='font-bold my-1'>Total Applicants: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.applications?.length}</span></h1>
-                <h1 className='font-bold my-1'>Posted Date: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.createdAt.split("T")[0]}</span></h1>
+                <h1 className='font-bold my-1'>Role: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.subject}</span></h1>
+                <h1 className='font-bold my-1'>Platform: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.platform}</span></h1>
+                <h1 className='font-bold my-1'>Duration: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.duration}</span></h1>
+                <h1 className='font-bold my-1'>Fees: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.fees}</span></h1>
+                <h1 className='font-bold my-1'>Description: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.aboutCourse}</span></h1>
             </div>
         </div>
     )

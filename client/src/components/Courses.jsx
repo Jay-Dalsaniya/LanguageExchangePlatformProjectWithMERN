@@ -5,8 +5,6 @@ import Course from './Course';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
-// const coursesArray = [1, 2, 3, 4, 5, 6, 7, 8];
-
 const Courses = () => {
     const { allCourses, searchedQuery } = useSelector(store => store.course);
     const [filterCourses, setFilterCourses] = useState(allCourses);
@@ -14,9 +12,9 @@ const Courses = () => {
     useEffect(() => {
         if (searchedQuery) {
             const filteredCourses = allCourses.filter((course) => {
-                return course.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    course.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    course.location.toLowerCase().includes(searchedQuery.toLowerCase())
+                return course.courseName.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+                    course.subject.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+                    course.platform.toLowerCase().includes(searchedQuery.toLowerCase())
             })
             setFilterCourses(filteredCourses)
         } else {

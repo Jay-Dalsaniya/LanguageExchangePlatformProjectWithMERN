@@ -12,22 +12,22 @@ export const registerLanguage = async (req, res) => {
                 success: false
             });
         }
-        let language = await Language.findOne({ languageName: languageName });
-        if (language) {
+        let existingLanguage = await Language.findOne({ languageName: languageName });
+        if (existingLanguage) {
             return res.status(400).json({
                 message: "You can't register the same language.",
                 success: false
             })
 
         };
-        language = await Company.create({
-            name: companyName,
+        const newLanguage = await Language.create({
+            languageName: languageName,
             userId: req.id
         });
 
         return res.status(201).json({
             message: "Language registered successfully.",
-            language,
+            Language: newLanguage,
             success: true
         })
     } catch (error) {
@@ -67,7 +67,7 @@ export const getLanguageById = async (req, res) => {
             })
         }
         return res.status(200).json({
-            language,  
+            language,  // Changed 'Language' to 'language'
             success: true
         })
     } catch (error) {
