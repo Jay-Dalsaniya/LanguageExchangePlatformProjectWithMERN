@@ -5,22 +5,37 @@ import cloudinary from "../utils/cloudinary.js";
 // Register a new language
 export const registerLanguage = async (req, res) => {
     try {
-        const { languageName, creator, country } = req.body;
+        const { languageName, creator, country, description } = req.body;
+
         if (!languageName || !creator || !country) {
             return res.status(400).json({
                 message: "Language name, creator, and country are required.",
                 success: false
             });
         }
-        let existingLanguage = await Language.findOne({ languageName: languageName });
+
+        let existingLanguage = await Language.findOne({ languageName });
         if (existingLanguage) {
             return res.status(400).json({
                 message: "You can't register the same language.",
                 success: false
             });
         }
+
+        const file = req.file;
+        let logo;
+        if (file) {
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            logo = cloudResponse.secure_url;
+        }
+
         const newLanguage = await Language.create({
-            languageName: languageName,
+            languageName,
+            creator,
+            country,
+            description,
+            logo,
             userId: req.id
         });
 
@@ -32,20 +47,20 @@ export const registerLanguage = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: "An error occurred.",
+            message: "Server error.",
             success: false
         });
     }
-}
+};
 
 // Get all languages registered by a user
 export const getLanguages = async (req, res) => {
     try {
         const userId = req.id; // logged in user id
         const languages = await Language.find({ userId });
-        if (!languages || languages.length === 0) {
+        if (!languages.length) {
             return res.status(404).json({
-                message: "Languages not found.",
+                message: "No languages found.",
                 success: false
             });
         }
@@ -56,16 +71,16 @@ export const getLanguages = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: "An error occurred.",
+            message: "Server error.",
             success: false
         });
     }
-}
+};
 
 // Get language by id
 export const getLanguageById = async (req, res) => {
     try {
-        const languageId = req.params.id;
+        const languageId = req.params.id; // Changed 'LanguageId' to 'languageId'
         const language = await Language.findById(languageId);
         if (!language) {
             return res.status(404).json({
@@ -80,26 +95,26 @@ export const getLanguageById = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: "An error occurred.",
+            message: "Server error.",
             success: false
         });
     }
-}
+};
 
 // Update language details
 export const updateLanguage = async (req, res) => {
     try {
-        const { languageName, creator, country, description, website, location } = req.body;
+        const { languageName, creator, country, description } = req.body;
 
+        const file = req.file;
         let logo;
-        if (req.file) {
-            // Handle Cloudinary upload
-            const fileUri = getDataUri(req.file);
+        if (file) {
+            const fileUri = getDataUri(file);
             const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
             logo = cloudResponse.secure_url;
         }
 
-        const updateData = { languageName, creator, country, description, website, location };
+        const updateData = { languageName, creator, country, description };
         if (logo) updateData.logo = logo;
 
         const updatedLanguage = await Language.findByIdAndUpdate(req.params.id, updateData, { new: true });
@@ -115,12 +130,11 @@ export const updateLanguage = async (req, res) => {
             language: updatedLanguage,
             success: true
         });
-
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: "An error occurred.",
+            message: "Server error.",
             success: false
         });
     }
-}
+};

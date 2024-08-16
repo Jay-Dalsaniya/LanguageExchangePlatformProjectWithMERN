@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from './shared/Navbar'
-import FilterCard from './FilterCard'
+import React, { useEffect, useState } from 'react';
+import Navbar from './shared/Navbar';
+import FilterCard from './FilterCard';
 import Course from './Course';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
@@ -12,13 +12,24 @@ const Courses = () => {
     useEffect(() => {
         if (searchedQuery) {
             const filteredCourses = allCourses.filter((course) => {
-                return course.courseName.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    course.subject.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    course.platform.toLowerCase().includes(searchedQuery.toLowerCase())
-            })
-            setFilterCourses(filteredCourses)
+                const matchCourseName = searchedQuery.courseName
+                    ? course.courseName.toLowerCase().includes(searchedQuery.courseName.toLowerCase())
+                    : true;
+                const matchLanguage = searchedQuery.language
+                    ? course.language.toLowerCase().includes(searchedQuery.language.toLowerCase())
+                    : true;
+                const matchFees = searchedQuery.fees
+                    ? course.fees >= parseInt(searchedQuery.fees.split('-')[0]) && course.fees <= parseInt(searchedQuery.fees.split('-')[1])
+                    : true;
+                const matchCountry = searchedQuery.country
+                    ? course.country.toLowerCase().includes(searchedQuery.country.toLowerCase())
+                    : true;
+
+                return matchCourseName && matchLanguage && matchFees && matchCountry;
+            });
+            setFilterCourses(filteredCourses);
         } else {
-            setFilterCourses(allCourses)
+            setFilterCourses(allCourses);
         }
     }, [allCourses, searchedQuery]);
 
@@ -53,7 +64,7 @@ const Courses = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Courses
+export default Courses;

@@ -4,80 +4,71 @@ import { Label } from './ui/label';
 import { useDispatch } from 'react-redux';
 import { setSearchedQuery } from '@/redux/courseSlice';
 
-// Updated filter data based on new schema fields
+// Updated filter data including Fees and Country
 const filterData = [
     {
         filterType: "Course Name",
-        array: ["Course A", "Course B", "Course C"] // Sample values, update as needed
-    },
-    {
-        filterType: "Subject",
-        array: ["Math", "Science", "History"] // Sample values, update as needed
-    },
-    {
-        filterType: "Platform",
-        array: ["Online", "In-Person"] // Sample values, update as needed
-    },
-    {
-        filterType: "Duration",
-        array: ["1 Month", "3 Months", "6 Months"] // Sample values, update as needed
-    },
-    {
-        filterType: "Fees",
-        array: ["0-50", "51-100", "101-200"] // Sample values, update as needed
-    },
-    {
-        filterType: "Fee Type",
-        array: ["One-time", "Monthly", "Yearly"] // Sample values, update as needed
-    },
-    {
-        filterType: "Level",
-        array: ["Beginner", "Intermediate", "Advanced"] // Sample values, update as needed
+        array: ["Basic Course", "Intermediate Course", "Advanced Course"] // Example course names
     },
     {
         filterType: "Language",
-        array: ["English", "Spanish", "French"] // Sample values, update as needed
+        array: ["English", "Spanish", "French", "German", "Mandarin", "Hindi", "Japanese"] // Example languages
+    },
+    {
+        filterType: "Fees",
+        array: ["0-50", "51-100", "101-200"] // Example fee ranges
+    },
+    {
+        filterType: "Country",
+        array: ["USA", "India", "Germany", "Japan", "China", "Spain", "France"] // Example countries
     }
 ];
 
 const FilterCard = () => {
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedFilters, setSelectedFilters] = useState({
+        courseName: '',
+        language: '',
+        fees: '',
+        country: ''
+    });
     const dispatch = useDispatch();
 
-    const changeHandler = (value) => {
-        setSelectedValue(value);
-    }
+    const changeHandler = (filterType, value) => {
+        setSelectedFilters((prevFilters) => ({
+            ...prevFilters,
+            [filterType]: value
+        }));
+    };
 
     useEffect(() => {
-        dispatch(setSearchedQuery(selectedValue));
-    }, [selectedValue, dispatch]);
+        dispatch(setSearchedQuery(selectedFilters));
+    }, [selectedFilters, dispatch]);
 
     return (
         <div className='w-full bg-white p-3 rounded-md'>
             <h1 className='font-bold text-lg'>Filter Courses</h1>
             <hr className='mt-3' />
-            <RadioGroup value={selectedValue} onValueChange={changeHandler}>
-                {
-                    filterData.map((data, index) => (
-                        <div key={index}>
-                            <h1 className='font-bold text-lg'>{data.filterType}</h1>
-                            {
-                                data.array.map((item, idx) => {
-                                    const itemId = `id${index}-${idx}`;
-                                    return (
-                                        <div className='flex items-center space-x-2 my-2' key={itemId}>
-                                            <RadioGroupItem value={item} id={itemId} />
-                                            <Label htmlFor={itemId}>{item}</Label>
-                                        </div>
-                                    );
-                                })
-                            }
-                        </div>
-                    ))
-                }
-            </RadioGroup>
+            {filterData.map((data, index) => (
+                <div key={index}>
+                    <h1 className='font-bold text-lg'>{data.filterType}</h1>
+                    <RadioGroup 
+                        value={selectedFilters[data.filterType.toLowerCase().replace(' ', '')]} 
+                        onValueChange={(value) => changeHandler(data.filterType.toLowerCase().replace(' ', ''), value)}
+                    >
+                        {data.array.map((item, idx) => {
+                            const itemId = `id${index}-${idx}`;
+                            return (
+                                <div className='flex items-center space-x-2 my-2' key={itemId}>
+                                    <RadioGroupItem value={item} id={itemId} />
+                                    <Label htmlFor={itemId}>{item}</Label>
+                                </div>
+                            );
+                        })}
+                    </RadioGroup>
+                </div>
+            ))}
         </div>
     );
-}
+};
 
 export default FilterCard;
