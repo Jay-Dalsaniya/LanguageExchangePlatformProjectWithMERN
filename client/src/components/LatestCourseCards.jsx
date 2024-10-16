@@ -21,7 +21,7 @@ const LatestCourseCards = ({ course }) => {
             <div className='flex items-center gap-2 mt-4'>
                 <Badge className={'text-blue-700 font-bold'} variant="ghost">{course?.duration}</Badge> {/* Updated field */}
                 <Badge className={'text-[#F83002] font-bold'} variant="ghost">{course?.feeType}</Badge> {/* Updated field */}
-                <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{course?.fees} {course?.feeType}</Badge> {/* Updated field */}
+                <Badge className={'text-[#7209b7] font-bold'} variant="ghost">${course?.fees} | {course?.feeType}</Badge> {/* Updated field */}
             </div>
         </div>
     );

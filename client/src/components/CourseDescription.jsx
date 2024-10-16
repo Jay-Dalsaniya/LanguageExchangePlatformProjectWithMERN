@@ -59,7 +59,7 @@ const CourseDescription = () => {
                     <div className='flex items-center gap-2 mt-4'>  
                         <Badge className={'text-blue-700 font-bold'} variant="ghost">{singleCourse?.level}</Badge>
                         <Badge className={'text-[#F83002] font-bold'} variant="ghost">{singleCourse?.feeType}</Badge>
-                        <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{singleCourse?.fees}</Badge>
+                        <Badge className={'text-[#7209b7] font-bold'} variant="ghost">${singleCourse?.fees}</Badge>
                     </div>
                 </div>
                 <Button
@@ -74,7 +74,7 @@ const CourseDescription = () => {
                 <h1 className='font-bold my-1'>Role: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.subject}</span></h1>
                 <h1 className='font-bold my-1'>Platform: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.platform}</span></h1>
                 <h1 className='font-bold my-1'>Duration: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.duration}</span></h1>
-                <h1 className='font-bold my-1'>Fees: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.fees}</span></h1>
+                <h1 className='font-bold my-1'>Fees: <span className='pl-4 font-normal text-gray-800'>${singleCourse?.fees}</span></h1>
                 <h1 className='font-bold my-1'>Description: <span className='pl-4 font-normal text-gray-800'>{singleCourse?.aboutCourse}</span></h1>
             </div>
         </div>

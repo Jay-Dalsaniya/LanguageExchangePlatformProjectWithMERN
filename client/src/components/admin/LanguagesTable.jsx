@@ -30,7 +30,7 @@ const LanguagesTable = () => {
                         <TableHead>Logo</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Creator</TableHead>
-                        <TableHead>Country</TableHead>
+                        <TableHead>Citizen</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>

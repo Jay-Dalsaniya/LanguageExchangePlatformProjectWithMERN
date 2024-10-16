@@ -12,7 +12,7 @@ const Course = ({ course }) => {
         const createdAt = new Date(mongodbTime);
         const currentTime = new Date();
         const timeDifference = currentTime - createdAt;
-        return Math.floor(timeDifference / (1000 * 24 * 60 * 60));
+        return Math.floor(timeDifference / ( 1000 * 24 * 60 * 60));
     }
 
     return (
@@ -41,7 +41,7 @@ const Course = ({ course }) => {
             <div className='flex items-center gap-2 mt-4'>
                 <Badge className={'text-blue-700 font-bold'} variant="ghost">{course?.level}</Badge>
                 <Badge className={'text-[#F83002] font-bold'} variant="ghost">{course?.feeType}</Badge>
-                <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{course?.fees}</Badge>
+                <Badge className={'text-[#7209b7] font-bold'} variant="ghost">${course?.fees}</Badge>
             </div>
             <div className='flex items-center gap-4 mt-4'>
                 <Button onClick={() => navigate(`/description/${course?._id}`)} variant="outline">Details</Button>

@@ -8,20 +8,15 @@ import { setSearchedQuery } from '@/redux/courseSlice';
 const filterData = [
     {
         filterType: "Course Name",
-        array: ["Basic Course", "Intermediate Course", "Advanced Course"] // Example course names
-    },
-    {
-        filterType: "Language",
-        array: ["English", "Spanish", "French", "German", "Mandarin", "Hindi", "Japanese"] // Example languages
+        key: "courseName",
+        array: ["Basic Course", "English","Intermediate Course", "Advanced Course"] // Example course names
     },
     {
         filterType: "Fees",
+        key: "fees",
         array: ["0-50", "51-100", "101-200"] // Example fee ranges
     },
-    {
-        filterType: "Country",
-        array: ["USA", "India", "Germany", "Japan", "China", "Spain", "France"] // Example countries
-    }
+   
 ];
 
 const FilterCard = () => {
@@ -33,10 +28,10 @@ const FilterCard = () => {
     });
     const dispatch = useDispatch();
 
-    const changeHandler = (filterType, value) => {
+    const changeHandler = (key, value) => {
         setSelectedFilters((prevFilters) => ({
             ...prevFilters,
-            [filterType]: value
+            [key]: value
         }));
     };
 
@@ -52,8 +47,8 @@ const FilterCard = () => {
                 <div key={index}>
                     <h1 className='font-bold text-lg'>{data.filterType}</h1>
                     <RadioGroup 
-                        value={selectedFilters[data.filterType.toLowerCase().replace(' ', '')]} 
-                        onValueChange={(value) => changeHandler(data.filterType.toLowerCase().replace(' ', ''), value)}
+                        value={selectedFilters[data.key]} 
+                        onValueChange={(value) => changeHandler(data.key, value)}
                     >
                         {data.array.map((item, idx) => {
                             const itemId = `id${index}-${idx}`;
